@@ -16,6 +16,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     precio = document.getElementById('precio'),
     descripcion = document.getElementById('descripcion'),
     existencias = document.getElementById('existencias');
+    
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {

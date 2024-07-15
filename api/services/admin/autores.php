@@ -1,7 +1,7 @@
 <?php
 // Importar la clase que gestiona los datos relacionados con 'autores'.
 require_once ('../../models/data/autores_data.php');
-
+ 
 // Verificar si se ha recibido una acción mediante el parámetro 'action' en la URL.
 if (isset($_GET['action'])) {
     // Iniciar una nueva sesión o reanudar la existente para utilizar variables de sesión.
@@ -106,7 +106,13 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el Autor'; // Mensaje de error si ocurre un problema.
                 }
                 break;
-
+                case 'cantidadLibrosAutor':
+                    if ($result['dataset'] = $autores->cantidadLibrosAutor()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No hay datos disponibles';
+                    }
+                    break;
             default: // Caso por defecto para manejar acciones desconocidas.
                 $result['error'] = 'Acción no disponible dentro de la sesión'; // Mensaje si la acción no es válida.
         }

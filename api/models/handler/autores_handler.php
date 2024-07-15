@@ -97,4 +97,19 @@ class AutoresHandler
         // Ejecutar la consulta y devolver el resultado
         return Database::executeRow($sql, $params);
     }
+
+
+    /*
+ *   Métodos para generar gráficos.
+ */
+public function cantidadLibrosAutor()
+{
+    $sql = '  SELECT nombre, COUNT(tb_libros.id_libro) cantidad
+            FROM tb_autores
+            INNER JOIN tb_libros ON tb_autores.id_autor = tb_libros.id_autor
+            GROUP BY tb_autores.id_autor
+            ORDER BY cantidad DESC
+            LIMIT 5';
+    return Database::getRows($sql);
+}
 }
