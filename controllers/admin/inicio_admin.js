@@ -25,7 +25,7 @@ const graficoBarrasAutor = async () => {
             autores.push(row.nombre);
             cantidades.push(row.cantidad);
         });
-        lineGraph('chart1', autores, cantidades, 'Cantidad de libros', 'Cantidad de libros por autor');
+        radarGraph ('chart1', autores, cantidades, 'Cantidad de libros', 'Cantidad de libros por autor');
     } else {
         document.getElementById('chart1').remove();
         console.log(DATA.error);
