@@ -25,8 +25,7 @@ const graficoBarrasAutor = async () => {
             autores.push(row.nombre);
             cantidades.push(row.cantidad);
         });
-        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart1', autores, cantidades, 'Cantidad de libros', 'Cantidad de libros por autor');
+        lineGraph('chart1', autores, cantidades, 'Cantidad de libros', 'Cantidad de libros por autor');
     } else {
         document.getElementById('chart1').remove();
         console.log(DATA.error);
