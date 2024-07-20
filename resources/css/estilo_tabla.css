@@ -14,7 +14,15 @@
   color: orange;
 }
 
-
+.col-sm-12 col-md-6 col-lg-4 canvas {
+  width: 400px;
+  height: 300px;
+}
+ 
+.row {
+  display: flex;
+  align-items: center;
+}
 /* Estilo específico para la tabla */
  .table {
   width: 100%;

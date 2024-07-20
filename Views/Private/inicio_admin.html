@@ -15,41 +15,42 @@
         <!-- Código del encabezado omitido por brevedad -->
     </header>
 
+    <style>
+        .chart-container {
+            margin-left: 85px;
+            /* Ajusta este valor según sea necesario */
+        }
 
-
+        .text-align {
+            text-align: center;
+        }
+    </style>
     <br><br><br><br><br><br><br><br>
     <h1 class="prueba">Buenos días</h1>
 
-    <!--========== LOADER SCREEN ==========
-
-    <div class="loader__container">
-
-        <img src="../../resources/img/book-loading.gif" alt="loader">
-     </div>-->
-
-
     <!-- Contenedor de gráficos -->
     <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-4">
-            <!-- Se muestra un gráfico con la cantidad de Autores por categoría -->
+        <div class="col-sm-12 col-md-6 col-lg-6 chart-container" style="width: 700px; height: 400px;">
             <canvas id="chart1"></canvas>
         </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <!-- Se muestra un gráfico con el porcentaje de productos por categoría -->
+            <canvas id="chart2"></canvas>
+        </div>
+
     </div>
     <!-- Importación de la librería para generar los gráficos. Para más información https://www.chartjs.org/ -->
     <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
-
 
     <!--=============== SWIPER JS ===============-->
     <script src="../../Resources/js/swiper-bundle.min.js"></script>
     <!--=============== SCROLLREVEAL ===============-->
     <script src="../../Resources/js/scrollreveal.min.js"></script>
     <script src="../../Resources/js/header_admin.js"></script>
-    <!--<script src="../../Resources/js/footer.js"></script>-->
     <script src="../../Resources/js/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../Resources/js/footer.js"></script>
     <script src="../../controllers/admin/inicio_admin.js"></script>
-
 </body>
 
 </html>
