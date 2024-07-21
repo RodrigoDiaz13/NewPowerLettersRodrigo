@@ -1,6 +1,6 @@
 <?php
 // Importar la clase que gestiona los datos relacionados con 'clasificación'.
-require_once ('../../models/data/clasificacion_data.php');
+require_once('../../models/data/clasificacion_data.php');
 
 // Verificar si se ha recibido una acción mediante el parámetro 'action' en la URL.
 if (isset($_GET['action'])) {
@@ -107,6 +107,14 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'cantidadLibrosClasificacion':
+                if ($result['dataset'] = $clasificacion->cantidadLibrosClasificacion()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
+
             default: // Caso por defecto para manejar acciones desconocidas.
                 $result['error'] = 'Acción no disponible dentro de la sesión'; // Mensaje si la acción no es válida.
         }
@@ -118,12 +126,12 @@ if (isset($_GET['action'])) {
         header('Content-type: application/json; charset=utf-8');
 
         // Convertir el resultado a formato JSON y enviarlo como respuesta.
-        print (json_encode($result));
+        print(json_encode($result));
     } else {
         // Si no hay una sesión válida, se devuelve un mensaje de acceso denegado.
-        print (json_encode('Acceso denegado'));
+        print(json_encode('Acceso denegado'));
     }
 } else {
     // Si no se recibe una acción, se devuelve un mensaje de recurso no disponible.
-    print (json_encode('Recurso no disponible'));
+    print(json_encode('Recurso no disponible'));
 }

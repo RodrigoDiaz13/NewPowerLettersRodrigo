@@ -97,4 +97,18 @@ class ClasificacionHandler
         // Ejecutar la consulta y devolver el resultado
         return Database::executeRow($sql, $params);
     }
+    
+/*
+ *   Métodos para generar gráficos.
+ */
+public function cantidadLibrosClasificacion()
+{
+    $sql = '  SELECT tb_clasificaciones.nombre, COUNT(tb_libros.id_libro) AS cantidad
+            FROM tb_clasificaciones
+            INNER JOIN tb_libros ON tb_clasificaciones.id_clasificacion = tb_libros.id_clasificacion
+            GROUP BY tb_clasificaciones.id_clasificacion
+            ORDER BY cantidad DESC
+            LIMIT 5';
+    return Database::getRows($sql);
+}
 }
