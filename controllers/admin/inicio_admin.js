@@ -44,7 +44,7 @@ const graficoBarrasClasificacion = async () => {
             clasificaciones.push(row.nombre);
             cantidades.push(row.cantidad);
         });
-        barGraph('chart2', clasificaciones, cantidades, 'Cantidad de libros', 'Cantidad de libros por clasificación');
+        pieGraph('chart2', clasificaciones, cantidades, 'Cantidad de libros', 'Cantidad de libros por clasificación');
     } else {
         document.getElementById('chart2').remove();
         console.log(DATA.error);
