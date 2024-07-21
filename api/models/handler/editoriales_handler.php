@@ -105,4 +105,16 @@ class EditorialesHandler
         // Ejecutar la consulta y devolver el resultado
         return Database::executeRow($sql, $params);
     }
+    /*
+ *   Métodos para generar gráficos.
+ */
+    public function cantidadLibrosEditorial() {
+        $sql = 'SELECT tb_editoriales.nombre, COUNT(tb_libros.id_libro) AS cantidad
+                FROM tb_editoriales
+                INNER JOIN tb_libros ON tb_editoriales.id_editorial = tb_libros.id_editorial
+                GROUP BY tb_editoriales.id_editorial
+                ORDER BY cantidad DESC
+                LIMIT 5';
+        return Database::getRows($sql);
+    }
 }
