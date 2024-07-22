@@ -325,4 +325,17 @@ class PedidoHandler
                 LIMIT 5';
         return Database::getRows($sql);
     }
+    // Función para obtener todos los pedidos
+    public function getPedidosRealizados()
+    {
+        $sql = 'SELECT tb_pedidos.id_pedido, tb_usuarios.nombre_usuario, tb_usuarios.apellido_usuario, tb_pedidos.direccion_pedido, tb_pedidos.estado, tb_pedidos.fecha_pedido, 
+                GROUP_CONCAT(CONCAT(tb_libros.titulo, " (", tb_detalle_pedidos.cantidad, ")") SEPARATOR ", ") AS detalles_pedido
+                FROM tb_pedidos
+                INNER JOIN tb_usuarios ON tb_pedidos.id_usuario = tb_usuarios.id_usuario
+                INNER JOIN tb_detalle_pedidos ON tb_pedidos.id_pedido = tb_detalle_pedidos.id_pedido
+                INNER JOIN tb_libros ON tb_detalle_pedidos.id_libro = tb_libros.id_libro
+                GROUP BY tb_pedidos.id_pedido
+                ORDER BY tb_pedidos.fecha_pedido DESC';
+        return Database::getRows($sql);
+    }
 }

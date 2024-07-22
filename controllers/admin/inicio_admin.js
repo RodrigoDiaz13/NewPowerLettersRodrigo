@@ -72,7 +72,7 @@ const graficoBarrasEditorial = async () => {
                 editoriales.push(row.nombre);
                 cantidades.push(row.cantidad);
             });
-            barGraph('chart3', editoriales, cantidades, 'Cantidad de libros', 'Cantidad de libros por editorial');
+            radarGraph('chart3', editoriales, cantidades, 'Cantidad de libros', 'Cantidad de libros por editorial');
         } else {
             document.getElementById('chart3').remove();
             console.log(DATA.error);
@@ -97,7 +97,7 @@ const graficoBarrasLibrosMasVendidos = async () => {
                 titulos.push(row.titulo);
                 cantidades.push(row.total_vendido);
             });
-            barGraph('chartLibrosMasVendidos', titulos, cantidades, 'Total Vendido', 'Libros Más Vendidos');
+            lineGraph('chartLibrosMasVendidos', titulos, cantidades, 'Total Vendido', 'Libros Más Vendidos');
         } else {
             document.getElementById('chartLibrosMasVendidos').remove();
             console.log(DATA.error);

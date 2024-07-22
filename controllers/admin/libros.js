@@ -93,6 +93,10 @@ const fillTable = async (form = null) => {
                     <a onclick="viewDetails(${row.id_libro})">
                     <i class="ri-search-eye-line"></i>
                     </a>
+                
+                    <a onclick="openReport2(${row.id_libro})">
+                    <i class="ri-search-eye-line"></i>
+                    </a>
                 </td>
             </tr>
             `;
@@ -205,4 +209,21 @@ const openDelete = async (id) => {
         }
     }
 }
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/libros_existentes.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+const openReport2 = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/detalle_libros.php`);
+    
+    // Se añade el parámetro 'id' a la URL.
+    PATH.searchParams.append('id_libro', id);
+    
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
 

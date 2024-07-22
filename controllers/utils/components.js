@@ -227,3 +227,148 @@ const fetchData = async (filename, action, form = null) => {
         console.log(error);
     }
 }
+/*
+*   Función para generar un gráfico de radar. Requiere la librería chart.js para funcionar.
+*   Parámetros: canvas (identificador de la etiqueta canvas), labels (etiquetas para el eje), data (valores de los datos), label (etiqueta para los datos) y title (título del gráfico).
+*   Retorno: ninguno.
+*/
+
+
+// Función para generar un gráfico de líneas
+const lineGraph = (canvas, xAxis, yAxis, legend, title) => {
+    let colors = ['#' + (Math.random().toString(16)).substring(2, 8)];
+    new Chart(document.getElementById(canvas), {
+        type: 'line',
+        data: {
+            labels: xAxis,
+            datasets: [{
+                label: legend,
+                data: yAxis,
+                borderColor: colors[0],
+                backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+}
+
+
+
+// Función para generar un gráfico de radar
+const radarGraph = (canvas, labels, data, legend, title) => {
+    let colors = ['#' + (Math.random().toString(16)).substring(2, 8)];
+    new Chart(document.getElementById(canvas), {
+        type: 'radar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: legend,
+                data: data,
+                borderColor: colors[0],
+                backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+}
+
+// Función para generar un gráfico de burbujas
+const bubbleGraph = (canvas, data, legend, title) => {
+    let colors = ['#' + (Math.random().toString(16)).substring(2, 8)];
+    new Chart(document.getElementById(canvas), {
+        type: 'bubble',
+        data: {
+            datasets: data.map(dataset => ({
+                label: dataset.label,
+                data: dataset.data,
+                backgroundColor: colors[0]
+            }))
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+}
+
+// Función para generar un gráfico de dispersión
+const scatterGraph = (canvas, data, legend, title) => {
+    let colors = ['#' + (Math.random().toString(16)).substring(2, 8)];
+    new Chart(document.getElementById(canvas), {
+        type: 'scatter',
+        data: {
+            datasets: data.map(dataset => ({
+                label: dataset.label,
+                data: dataset.data,
+                backgroundColor: colors[0]
+            }))
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+}
+
+// Función para generar un gráfico de área
+const areaGraph = (canvas, xAxis, yAxis, legend, title) => {
+    let colors = ['#' + (Math.random().toString(16)).substring(2, 8)];
+    new Chart(document.getElementById(canvas), {
+        type: 'line',
+        data: {
+            labels: xAxis,
+            datasets: [{
+                label: legend,
+                data: yAxis,
+                borderColor: colors[0],
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                fill: true
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+}

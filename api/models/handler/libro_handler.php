@@ -213,4 +213,45 @@ class LibroHandler
                 LIMIT 5';
         return Database::getRows($sql);
     }
+
+
+
+    public function getLibrosEnExistencia()
+    {
+        // Consulta para obtener los libros con más existencias
+        $sql = 'SELECT tb_libros.titulo, tb_libros.existencias, tb_libros.precio
+                FROM tb_libros
+                ORDER BY tb_libros.existencias DESC
+                ';
+
+        // Ejecuta la consulta y pasa el parámetro de límite
+        return Database::getRows($sql);
+    }
+
+    // Método para obtener los datos de un libro específico por su ID
+    public function getReporteLibros($id_libro)
+    {
+        
+        $sql = 'SELECT l.id_libro, l.titulo, a.nombre AS autor, e.nombre AS editorial, g.nombre AS genero, c.nombre AS clasificacion, l.existencias, l.precio
+                    FROM tb_libros l
+                    INNER JOIN tb_autores a ON l.id_autor = a.id_autor
+                    INNER JOIN tb_editoriales e ON l.id_editorial = e.id_editorial
+                    INNER JOIN tb_generos g ON l.id_genero = g.id_genero
+                    INNER JOIN tb_clasificaciones c ON l.id_clasificacion = c.id_clasificacion
+                    WHERE l.id_libro = ?';
+        $params = array($id_libro);
+        return Database::getRows($sql, $params);
+    }
+      /*
+ *   Métodos para generar reportes por editorial.
+ */
+public function getLibrosPorEditorial($id_editorial) {
+    $sql = 'SELECT tb_libros.titulo, tb_autores.nombre AS autor, tb_libros.precio, tb_libros.existencias
+            FROM tb_libros
+            INNER JOIN tb_autores ON tb_libros.id_autor = tb_autores.id_autor
+            WHERE tb_libros.id_editorial = ?
+            ORDER BY tb_libros.titulo ASC';
+    $params = array($id_editorial);
+    return Database::getRows($sql, $params);
+}
 }

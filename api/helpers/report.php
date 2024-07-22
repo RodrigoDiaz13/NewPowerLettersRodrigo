@@ -9,7 +9,7 @@ require_once('../../libraries/fpdf185/fpdf.php');
 class Report extends FPDF
 {
     // Constante para definir la ruta de las vistas del sitio privado.
-    const CLIENT_URL = 'http://localhost/NewPowerLetters/Views/Private/';
+    const CLIENT_URL = 'http://localhost/NewPowerLettersRodrigo/views/admin/';
     // Propiedad para guardar el título del reporte.
     private $title = null;
 
@@ -27,10 +27,10 @@ class Report extends FPDF
             // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
-            $this->setTitle('powerletters - Reporte', true);
-            // Se establecen los margenes del documento (izquierdo, superior y derecho).
-            $this->setMargins(15, 15, 15);
-            // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header()
+            $this->setTitle('PowerLetters - Reporte', true);
+            // Se establecen los márgenes del documento (izquierdo, superior y derecho) en 1.5 cm.
+            $this->setMargins(15, 15, 15); // 1.5 cm es igual a 15 mm.
+            // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header().
             $this->addPage('p', 'letter');
             // Se define un alias para el número total de páginas que se muestra en el pie del documento.
             $this->aliasNbPages();
@@ -55,16 +55,15 @@ class Report extends FPDF
     */
     public function header()
     {
-        // Se establece el logo.
-        $this->image('../../../imagenes/logo.png', 15, 15, 20);
-        // Se ubica el título.
-        $this->cell(20);
+        // Se establece el logo (ajustar el tamaño y la posición según sea necesario).
+        $this->image('../../images/libros/default.png', 15, 10, 20); // Tamaño y posición del logo ajustados
+        // Se ubica el título centrado.
+        $this->setY(15); // Ajustar Y para centrar verticalmente
         $this->setFont('Arial', 'B', 15);
-        $this->cell(166, 10, $this->encodeString($this->title), 0, 1, 'C');
-        // Se ubica la fecha y hora del servidor.
-        $this->cell(20);
+        $this->cell(0, 10, $this->encodeString($this->title), 0, 1, 'C');
+        // Se ubica la fecha y hora del servidor centrado.
         $this->setFont('Arial', '', 10);
-        $this->cell(166, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
+        $this->cell(0, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
         // Se agrega un salto de línea para mostrar el contenido principal del documento.
         $this->ln(10);
     }
@@ -79,7 +78,7 @@ class Report extends FPDF
         $this->setY(-15);
         // Se establece la fuente para el número de página.
         $this->setFont('Arial', 'I', 8);
-        // Se imprime una celda con el número de página.
+        // Se imprime una celda con el número de página centrado.
         $this->cell(0, 10, $this->encodeString('Página ') . $this->pageNo() . '/{nb}', 0, 0, 'C');
     }
 }

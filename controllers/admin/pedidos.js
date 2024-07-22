@@ -173,3 +173,9 @@ const graficoClientesConMasPedidos = async () => {
         console.error('Error fetching data for clients chart:', error);
     }
 };
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/pedidos_hechos.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}

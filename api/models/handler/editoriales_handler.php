@@ -117,4 +117,5 @@ class EditorialesHandler
                 LIMIT 5';
         return Database::getRows($sql);
     }
+  
 }

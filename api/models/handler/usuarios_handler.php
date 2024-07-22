@@ -205,4 +205,15 @@ class UsuarioHandler
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
+
+    public function getClientesRegistrados()
+{
+    // Consulta para obtener todos los clientes registrados
+    $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, correo_usuario, telefono_usuario, direccion_usuario, fecha_registro
+            FROM tb_usuarios
+            ORDER BY fecha_registro DESC';
+    
+    // Ejecuta la consulta
+    return Database::getRows($sql);
+}
 }
