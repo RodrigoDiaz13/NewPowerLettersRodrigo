@@ -89,6 +89,7 @@ async function readDetail() {
         });
         // Se muestra el total a pagar con dos decimales (según las indicaciones).
         document.getElementById('pago').textContent = total.toFixed(2);
+        
     } else {
         sweetAlert(4, DATA.error, false, 'index.html');
     }
@@ -113,10 +114,15 @@ async function finishOrder() {
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             sweetAlert(1, DATA.message, false, 'index.html');
+            const PATH = new URL(`${SERVER_URL}reports/public/factura.php`);
+            // Se abre el reporte en una nueva pestaña.
+            window.open(PATH.href);
+            
         } else {
             sweetAlert(2, DATA.error, false);
         }
     }
+
 }
 /*
 *   Función asíncrona para mostrar un mensaje de confirmación al momento de eliminar un producto del carrito.

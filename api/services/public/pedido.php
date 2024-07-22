@@ -147,7 +147,18 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-
+                case 'getDetallesPorId':
+                    if (!$pedido->setIdDetalle($_POST['idDetalle'])) {
+                        $result['error'] = $pedido->getDataError();
+                    } elseif ($pedido->getDetallesPorId()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Libro removido correctamente';
+                        $result['cliente'] = $_SESSION['idUsuario'];
+                        $result['pedido'] = $_SESSION['idPedido'];
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al remover el producto';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

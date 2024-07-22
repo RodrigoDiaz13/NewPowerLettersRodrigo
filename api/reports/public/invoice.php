@@ -9,7 +9,7 @@ require_once('../../libraries/fpdf185/fpdf.php');
 class Report extends FPDF
 {
     // Constante para definir la ruta de las vistas del sitio privado.
-    const CLIENT_URL = 'http://localhost/NewPowerLettersRodrigo/views/admin/';
+    const CLIENT_URL = 'http://localhost/NewPowerLettersRodrigo/views/public/';
     // Propiedad para guardar el título del reporte.
     private $title = null;
 
@@ -23,7 +23,7 @@ class Report extends FPDF
         // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
         session_start();
         // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
-        if (isset($_SESSION['idAdministrador'])) {
+        if (isset($_SESSION['idUsuario'])) {
             // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
@@ -38,26 +38,7 @@ class Report extends FPDF
             header('location:' . self::CLIENT_URL);
         }
     }
-    public function startReport2($title)
-    {
-        // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
-        session_start();
-        // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
-        if (isset($_SESSION['idAdministrador'])) {
-            // Se asigna el título del documento a la propiedad de la clase.
-            $this->title = $title;
-            // Se establece el título del documento (true = utf-8).
-            $this->setTitle('PowerLetters - Reporte', true);
-            // Se establecen los márgenes del documento (izquierdo, superior y derecho) en 1.5 cm.
-            $this->setMargins(15, 15, 15); // 1.5 cm es igual a 15 mm.
-            // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header().
-            $this->addPage('l', 'letter');
-            // Se define un alias para el número total de páginas que se muestra en el pie del documento.
-            $this->aliasNbPages();
-        } else {
-            header('location:' . self::CLIENT_URL);
-        }
-    }
+
     /*
     *   Método para codificar una cadena de alfabeto español a UTF-8.
     *   Parámetros: $string (cadena).
@@ -97,10 +78,7 @@ class Report extends FPDF
         $this->setY(-15);
         // Se establece la fuente para el número de página.
         $this->setFont('Arial', 'I', 8);
-        $this->Cell(0, 10, $this->encodeString('Reporte generado por: ' .$_SESSION['aliasAdministrador']), 0, 0,'C');
-
         // Se imprime una celda con el número de página centrado.
-        
         $this->cell(0, 10, $this->encodeString('Página ') . $this->pageNo() . '/{nb}', 0, 0, 'C');
     }
 }

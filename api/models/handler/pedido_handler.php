@@ -338,4 +338,44 @@ class PedidoHandler
                 ORDER BY tb_pedidos.fecha_pedido DESC';
         return Database::getRows($sql);
     }
+    // Establece el ID del pedido
+    public function setId($id)
+    {
+        if (filter_var($id, FILTER_VALIDATE_INT)) {
+            $this->id_detalle = $id;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    // Método para obtener detalles de un pedido específico
+    public function getDetallesPorId() {
+        $sql = 'SELECT
+                    dp.id_detalle,
+                    dp.id_libro,
+                    dp.cantidad,
+                    dp.precio,
+                    l.titulo,
+                    l.imagen,
+                    u.nombre_usuario,
+                    p.direccion_pedido,
+                    p.estado,
+                    p.fecha_pedido
+                FROM 
+                    tb_detalle_pedidos AS dp
+                INNER JOIN 
+                    tb_pedidos AS p ON dp.id_pedido = p.id_pedido
+                INNER JOIN 
+                    tb_usuarios AS u ON p.id_usuario = u.id_usuario
+                INNER JOIN 
+                    tb_libros AS l ON dp.id_libro = l.id_libro
+                WHERE 
+                    dp.id_detalle = ?';
+                    
+        return Database::getRow($sql, array($this->id_detalle));
+    }
 }
+

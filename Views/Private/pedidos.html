@@ -22,6 +22,10 @@
             <br>
             <h1 class="section__title">Gestión de pedidos</h1>
             <!-- Formulario de búsqueda y botón de agregar -->
+            <div class="agregar">
+                <button class="add-button" onclick="openReport()"><i class="ri-add-line"></i> Ver
+                    reporte</button>
+            </div>
             <form id="searchForm" class="search-container">
                 <div class="search-form" id="search_generos">
                     <input type="search" name="search" class="search-input"
@@ -34,10 +38,9 @@
                 <button class="add-button" onclick="graficoClientesConMasPedidos()"><i class="ri-add-line"></i> Ver
                     gráfico</button>
             </div>
-            <div class="agregar">
-                <button class="add-button" onclick="openReport()"><i class="ri-add-line"></i> Ver
-                    reporte</button>
-            </div>
+
+        
+           
             <!-- Tabla con estilo elegante -->
             <table class="table">
                 <thead>
