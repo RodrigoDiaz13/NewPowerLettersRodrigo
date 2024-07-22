@@ -28,7 +28,12 @@
                         placeholder="Buscar por dirección, cliente, fecha o estado...">
                     <button class="search-button" type="submit"><i class="ri-search-line"></i></button>
                 </div>
+
             </form>
+            <div class="agregar">
+                <button class="add-button" onclick="graficoClientesConMasPedidos()"><i class="ri-add-line"></i> Ver
+                    gráfico</button>
+            </div>
             <!-- Tabla con estilo elegante -->
             <table class="table">
                 <thead>
@@ -135,9 +140,29 @@
                 </div>
             </div>
         </div>
+        <!-- Modal de la vista con gráfico -->
+        <div id="graficoModal" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content card">
+                <span onclick="closeGraficoModal()" class="close"
+                    style="font-size: 40px; font-weight: bold;">&times;</span>
+                <div class="card-body">
+                    <br>
+                    <!-- Contenedor para mostrar el gráfico -->
+                    <canvas id="chartClientes"></canvas>
+                    <div class="modal-footer">
+                        <br><br><br>
+                        <button type="submit" class="genero__button button"
+                            onclick="closeGraficoModal()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
     </main>
+
     <!--=============== SWIPER JS ===============-->
     <script src="../../Resources/js/swiper-bundle.min.js"></script>
     <!--=============== SCROLLREVEAL ===============-->
@@ -147,8 +172,11 @@
     <script src="../../Resources/js/modals_.js"></script>
     <script src="../../Resources/js/main.js"></script>
     <script src="../../Resources/js/sweetalert.min.js"></script>
+    <!-- Importación de la librería para generar los gráficos. Para más información https://www.chartjs.org/ -->
+    <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/admin/pedidos.js"></script>
+
 </body>
 
 </html>

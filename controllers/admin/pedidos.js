@@ -147,3 +147,29 @@ const viewDetails = async (id) => {
         sweetAlert(2, DATA.error, false);
     }
 }
+const graficoClientesConMasPedidos = async () => {
+    try {
+        // Petición para obtener los datos del gráfico.
+        const DATA = await fetchData(PEDIDO_API, 'clientesConMasPedidos');
+        console.log(DATA); // Verificar el contenido de DATA
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+        if (DATA.status) {
+            AbrirModalGrafico();
+            // Se declaran los arreglos para guardar los datos a graficar.
+            let clientes = [];
+            let cantidades = [];
+            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            DATA.dataset.forEach(row => {
+                // Se agregan los datos a los arreglos.
+                clientes.push(`${row.nombre_usuario} ${row.apellido_usuario}`);
+                cantidades.push(row.total_pedidos);
+            });
+            barGraph('chartClientes', clientes, cantidades, 'Total de Pedidos', 'Clientes con más pedidos');
+        } else {
+            document.getElementById('chartClientes').remove();
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.error('Error fetching data for clients chart:', error);
+    }
+};

@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase para trabajar con la base de datos.
-require_once ('../../helpers/database.php');
+require_once('../../helpers/database.php');
 
 /*
  * Clase para manejar el comportamiento de los datos de la tabla PRODUCTO.
@@ -199,5 +199,18 @@ class LibroHandler
         } else {
             return false;
         }
+    }
+    /*
+     * Funcion para graficar
+     */
+    public function getLibrosMasVendidos($limit = 5)
+    {
+        $sql = 'SELECT tb_libros.titulo, SUM(tb_detalle_pedidos.cantidad) AS total_vendido
+                FROM tb_detalle_pedidos
+                INNER JOIN tb_libros ON tb_detalle_pedidos.id_libro = tb_libros.id_libro
+                GROUP BY tb_libros.id_libro
+                ORDER BY total_vendido DESC
+                LIMIT 5';
+        return Database::getRows($sql);
     }
 }

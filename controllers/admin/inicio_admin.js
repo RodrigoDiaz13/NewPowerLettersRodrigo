@@ -2,6 +2,7 @@
 const AUTORES_API = 'services/admin/autores.php';
 const CLASIFICACION_API = 'services/admin/clasificacion.php';
 const EDITORIALES_API = 'services/admin/editoriales.php';
+const LIBRO_API = 'services/admin/libros.php'
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoBarrasAutor();
     graficoBarrasClasificacion();
     graficoBarrasEditorial ();
+    graficoBarrasLibrosMasVendidos ();
 });
 
 const graficoBarrasAutor = async () => {
@@ -77,5 +79,30 @@ const graficoBarrasEditorial = async () => {
         }
     } catch (error) {
         console.error('Error fetching data for editorial chart:', error);
+    }
+};
+const graficoBarrasLibrosMasVendidos = async () => {
+    try {
+        // Petición para obtener los datos del gráfico.
+        const DATA = await fetchData(LIBRO_API, 'getLibrosMasVendidos');
+        console.log(DATA); // Verificar el contenido de DATA
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+        if (DATA.status) {
+            // Se declaran los arreglos para guardar los datos a graficar.
+            let titulos = [];
+            let cantidades = [];
+            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            DATA.dataset.forEach(row => {
+                // Se agregan los datos a los arreglos.
+                titulos.push(row.titulo);
+                cantidades.push(row.total_vendido);
+            });
+            barGraph('chartLibrosMasVendidos', titulos, cantidades, 'Total Vendido', 'Libros Más Vendidos');
+        } else {
+            document.getElementById('chartLibrosMasVendidos').remove();
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.error('Error fetching data for top selling books chart:', error);
     }
 };

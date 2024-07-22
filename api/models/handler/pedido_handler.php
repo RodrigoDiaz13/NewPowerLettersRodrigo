@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase para trabajar con la base de datos.
-require_once ('../../helpers/database.php');
+require_once('../../helpers/database.php');
 
 /*
  * Clase para manejar el comportamiento de los datos de la tabla PRODUCTO.
@@ -49,7 +49,7 @@ class PedidoHandler
     {
         // Llama a la función getOrder para verificar si ya existe un pedido en estado 'PENDIENTE' para el usuario actual.
         if ($this->getOrder()) {
-            return true;// Si ya existe un pedido pendiente, retorna true.
+            return true; // Si ya existe un pedido pendiente, retorna true.
         } else {
             // Si no existe un pedido pendiente, crea uno nuevo.
             $sql = 'INSERT INTO tb_pedidos(direccion_pedido, id_usuario)
@@ -312,5 +312,17 @@ class PedidoHandler
             WHERE id_detalle = ? AND id_pedido = ?';
         $params = array($this->id_detalle, $_SESSION['idPedido']);
         return Database::executeRow($sql, $params);
+    }
+
+    // Función para obtener los clientes con más pedidos hechos
+    public function getClientesConMasPedidos()
+    {
+        $sql = 'SELECT tb_usuarios.nombre_usuario, tb_usuarios.apellido_usuario, COUNT(tb_pedidos.id_pedido) AS total_pedidos
+                FROM tb_pedidos
+                INNER JOIN tb_usuarios ON tb_pedidos.id_usuario = tb_usuarios.id_usuario
+                GROUP BY tb_usuarios.id_usuario
+                ORDER BY total_pedidos DESC
+                LIMIT 5';
+        return Database::getRows($sql);
     }
 }
