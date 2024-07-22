@@ -95,7 +95,7 @@ const fillTable = async (form = null) => {
                     </a>
                 
                     <a onclick="openReport2(${row.id_libro})">
-                    <i class="ri-search-eye-line"></i>
+                    <<i class="ri-folder-chart-2-line"></i>
                     </a>
                 </td>
             </tr>
@@ -225,5 +225,6 @@ const openReport2 = (id) => {
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
+
 
 

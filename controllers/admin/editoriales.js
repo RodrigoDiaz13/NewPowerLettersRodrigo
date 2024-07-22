@@ -79,6 +79,9 @@ const fillTable = async (form = null) => {
                     <a onclick="openDelete(${row.id_editorial})">
                         <i class="ri-delete-bin-line"></i>
                     </a>
+                    <a onclick="openReport(${row.id_editorial})">
+                    <i class="ri-folder-chart-line"></i>
+                    </a>
                 </td>
             </tr>
             `;
@@ -155,4 +158,14 @@ const openDelete = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+}
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/libros_editorial.php`);
+    
+    // Se añade el parámetro 'id' a la URL.
+    PATH.searchParams.append('idEditorial', id);
+    
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }

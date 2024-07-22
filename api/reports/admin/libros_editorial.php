@@ -11,7 +11,7 @@ $pdf = new Report;
 // Se verifica si existe un valor para el ID de la editorial, de lo contrario se muestra un mensaje.
 if (isset($_GET['idEditorial'])) {
     // Se incluyen las clases para la transferencia y acceso a datos.
-    require_once('../../models/data/editorial_data.php'); // Asegúrate de tener esta clase para obtener la editorial
+    require_once('../../models/data/editoriales_data.php'); // Asegúrate de tener esta clase para obtener la editorial
     $libros = new LibroData;
     $editorial = new EditorialData;
 
