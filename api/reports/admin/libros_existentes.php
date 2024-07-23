@@ -36,7 +36,7 @@ if ($dataLibros = $libro->getLibrosEnExistencia()) {
     foreach ($dataLibros as $rowLibro) {
         // Se alterna el color de fondo de las filas.
         $pdf->setFillColor($fill ? 240 : 255, $fill ? 255 : 255, $fill ? 255 : 255); // Blanco y gris muy claro alternados
-        $fill = !$fill;
+        $fill = !$fill;   
 
         // Se imprimen las celdas con los datos de los libros.
         $pdf->cell(100, 10, $pdf->encodeString($rowLibro['titulo']), 1, 0, '', 1);
