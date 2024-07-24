@@ -11,27 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTemplate();
     // Llamada a la función para mostrar los productos del carrito de compras.
     readDetail();
-
-    // Evento para enviar el formulario de cambiar cantidad de producto.
-    document.getElementById('saveForm').addEventListener('submit', async (event) => {
-        // Se evita recargar la página web después de enviar el formulario.
-        event.preventDefault();
-        // Constante tipo objeto con los datos del formulario.
-        const FORM = new FormData(document.getElementById('saveForm'));
-        // Petición para actualizar la cantidad de producto.
-        const DATA = await fetchData(PEDIDO_API, 'updateDetail', FORM);
-        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-        if (DATA.status) {
-            // Se actualiza la tabla para visualizar los cambios.
-            readDetail();
-            // Se cierra la caja de diálogo del formulario.
-            closeModal();
-            // Se muestra un mensaje de éxito.
-            sweetAlert(1, DATA.message, true);
-        } else {
-            sweetAlert(2, DATA.error, false);
-        }
-    });
 });
 
 // Método para cerrar el modal.
@@ -39,6 +18,27 @@ function closeModal() {
     MODAL.style.display = 'none';
 }
 
+// Evento para enviar el formulario de cambiar cantidad de producto.
+document.getElementById('saveForm').addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+  
+    event.preventDefault();
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(document.getElementById('saveForm'));
+    // Petición para actualizar la cantidad de producto.
+    const DATA = await fetchData(PEDIDO_API, 'updateDetail', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se actualiza la tabla para visualizar los cambios.
+        readDetail();
+        // Se cierra la caja de diálogo del formulario.
+        closeModal();
+        // Se muestra un mensaje de éxito.
+        sweetAlert(1, DATA.message, true);
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+});
 // Método para abrir el modal y cargar los datos del producto.
 function openModal(idDetalle, cantidadLibro) {
     // Asignar el ID del detalle al formulario.

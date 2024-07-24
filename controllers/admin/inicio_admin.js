@@ -48,7 +48,7 @@ const graficoBarrasClasificacion = async () => {
             clasificaciones.push(row.nombre);
             cantidades.push(row.cantidad);
         });
-        pieGraph('chart2', clasificaciones, cantidades, 'Cantidad de libros por categoria', 'Cantidad de libros por clasificación');
+        pieGraph('chart2', clasificaciones, cantidades, 'Cantidad de libros por genero', 'Cantidad de libros por clasificación');
     } else {
         document.getElementById('chart2').remove();
         console.log(DATA.error);
@@ -72,7 +72,7 @@ const graficoBarrasEditorial = async () => {
                 editoriales.push(row.nombre);
                 cantidades.push(row.cantidad);
             });
-            radarGraph('chart3', editoriales, cantidades, 'Cantidad de libros', 'Cantidad de libros por editorial');
+            barGraph('chart3', editoriales, cantidades, 'Cantidad de libros', 'Cantidad de libros por editorial');
         } else {
             document.getElementById('chart3').remove();
             console.log(DATA.error);

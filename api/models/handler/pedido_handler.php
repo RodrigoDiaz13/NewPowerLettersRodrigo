@@ -373,9 +373,9 @@ class PedidoHandler
                 INNER JOIN 
                     tb_libros AS l ON dp.id_libro = l.id_libro
                 WHERE 
-                    dp.id_detalle = ?';
+                    p.id_pedido = ?';
                     
-        return Database::getRow($sql, array($this->id_detalle));
+        return Database::getRows($sql, array($_SESSION['idPedido']));
     }
 }
 

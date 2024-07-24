@@ -148,7 +148,7 @@ if (isset($_GET['action'])) {
                 break;
 
                 case 'getDetallesPorId':
-                    if (!$pedido->setIdDetalle($_POST['idDetalle'])) {
+                    if (!$pedido->setIdDetalle($_POST['id_detalle'])) {
                         $result['error'] = $pedido->getDataError();
                     } elseif ($pedido->getDetallesPorId()) {
                         $result['status'] = 1;
